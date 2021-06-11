@@ -1,0 +1,4 @@
+host: localhost
+port: 5000
+client_max_size: 100000000
+openapi: "data/config/openapi.yaml"

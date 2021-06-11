@@ -1,0 +1,8 @@
+bing_limit_concurrent_request: 20
+bing_limit_texts_per_request: 50
+bing_limit_chars_per_request: 5000
+bing_limit_chars_per_text: 5000
+deepl_limit_concurrent_request: 20
+deepl_limit_texts_per_request: 50
+deepl_limit_chars_per_request: 5000
+deepl_limit_chars_per_text: 5000

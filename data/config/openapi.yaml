@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Translation tower API
+servers:
+  - url: "/api/1.0.0"
+components:
+  schemas:
+    Annotation:
+      type: object
+      properties:
+        label:
+          type: string
+        start:
+          type: integer
+        stop:
+          type: integer
+        origin:
+          type: integer
+      additionalProperties: false
+paths:
+  /translate:
+    post:
+      summary:  Translate
+      operationId: translate
+      requestBody:
+        required: true
+        description: A JSON object containing texts to translate and options
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                texts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        maxLength: 5000
+                      annotations:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Annotation'
+                      source_lang:
+                        type: string
+                      target_lang:
+                        type: string
+                      translator:
+                        type: string
+                        enum: [bing, deepl]
+                      translator_html_mode:
+                        type: boolean
+                        default: false
+                      translator_fake_mode:
+                        type: boolean
+                        default: false
+                      use_cache:
+                        type: boolean
+                        default: true
+                    required:
+                      - text
+                      - source_lang
+                      - target_lang
+                      - translator
+                    additionalProperties: false
+                  maxItems: 1000
+                  minItems: 1
+              required:
+                - texts
+      responses:
+        '200':
+          description: Translations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  translations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                        translation:
+                          type: string
+                        source_lang:
+                            type: string
+                        target_lang:
+                          type: string
+                        source_annotations:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Annotation'
+                        target_annotations:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Annotation'
+                        translator:
+                          type: string
+                        from_cache:
+                          type: boolean
+        '500':
+          description: Translation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+        '499':
+          description: "Request closed by client"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+
+        '400':
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+
+        '422':
+          description: "Unprocessable Entity"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
