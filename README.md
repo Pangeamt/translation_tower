@@ -22,5 +22,5 @@ pip install -r requirements.txt
 2. rename data/config/secret_sample.yaml -> data/config/secret.yaml
 
 ## Example 1: translate an uima_cas_xmi file
-From Inception download an annotated corpus as "uima cas xmi"
-Adapt the translate.xmi.py script to translate the file
+1. From Inception download an annotated corpus as "uima cas xmi".
+2. Adapt the translate.xmi.py script to translate the file.
