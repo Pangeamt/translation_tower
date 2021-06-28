@@ -20,20 +20,19 @@ async def main():
     await app.start()
 
     await app.translate_xmi_file(
-        xmi="cas.zip",  # the xmi file to translate
-        translated_xmi="cas_translated.zip",  # the path of the translated xmi file
-        source_lang="en",
-        target_lang="fr",
-        translator="deepl",  # or bing
+        xmi="webanno6958664086768861001export.zip",  # the xmi file to translate
+        translated_xmi="webanno6958664086768861001export_translated.zip",  # the path of the translated xmi file
+        source_lang="bg",
+        target_lang="en",
+        translator="bing",  # or bing
         translator_fake_mode=True,  # any real call do deepl is made. so you can test your code
     )
 
     # Stop translation app
     await app.stop()
 
-asyncio.run(
-   main()
-)
+asyncio.get_event_loop().run_until_complete(main())
+
 
 
 

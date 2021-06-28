@@ -44,13 +44,14 @@ def deep_texts_to_cas(
 
     # Annotations
     for annotated_text, start in zip(deep_texts, starts):
-        for annotation in annotated_text.annotations:
-            annotation = cas.typesystem.get_type(NAMED_ENTITY_NS)(
-                value=annotation.label,
-                begin=start + annotation.start,
-                end=start + annotation.stop,
-            )
-            cas.add_annotation(annotation)
+        if annotated_text.annotations:
+            for annotation in annotated_text.annotations:
+                annotation = cas.typesystem.get_type(NAMED_ENTITY_NS)(
+                    value=annotation.label,
+                    begin=start + annotation.start,
+                    end=start + annotation.stop,
+                )
+                cas.add_annotation(annotation)
 
     return cas
 
