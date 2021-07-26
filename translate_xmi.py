@@ -25,7 +25,7 @@ async def main():
         source_lang="bg",
         target_lang="en",
         translator="bing",  # or bing
-        translator_fake_mode=True,  # any real call do deepl is made. so you can test your code
+        translator_fake_mode=False,  # any real call do deepl is made. so you can test your code
     )
 
     # Stop translation app

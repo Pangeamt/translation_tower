@@ -20,6 +20,7 @@ async def bing_translate(
         headers = {
             "Ocp-Apim-Subscription-Key": api_key,
             "Content-type": "application/json",
+            'Ocp-Apim-Subscription-Region': "westeurope",
             "X-ClientTraceId": str(uuid.uuid4()),
         }
 
